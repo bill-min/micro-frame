@@ -33,14 +33,6 @@
       }
     ]
   },
-  "@client-order-timeout": {
-    "type": "number",
-    "autocomplete": [
-      {
-        "description": "An idle timeout in ms after which the rendering will convert to client-reorder"
-      }
-    ]
-  },
   "@catch <catch>": {
     "attributes": {},
     "autocomplete": [

@@ -16,31 +16,17 @@ $ {
 <else>
   $ const streamSource = STREAM_SOURCE_MAP.get(sourceName);
   $ const stream = streamSource.slot(input.slot);
-  $ let clientReorder = input.clientReorder;
   $ let finishLoading;
-  $ let clientOrderTimeoutPromise;
   $ {
     const loadingPromise =
       input.loading && new Promise((res) => (finishLoading = res));
   }
-  $ if (input.clientOrderTimeout) {
-    clientOrderTimeoutPromise = new Promise((resolve) => {
-      setTimeout(() => {
-        clientReorder = true;
-        resolve({
-          value: "",
-          done: false,
-        });
-      }, input.clientOrderTimeout);
-    });
-  }
   <div id=component.id data-slot=input.slot data-from=input.from>
     <macro name="wait">
-      <await(
-        clientOrderTimeoutPromise && !clientReorder
-          ? Promise.race([clientOrderTimeoutPromise, stream.next()])
-          : stream.next(),
-      ) client-reorder=clientReorder timeout=input.timeout>
+      <await(stream.next())
+        client-reorder=input.clientReorder
+        timeout=input.timeout
+      >
         <@then|{ value, done }|>
           <if(!done)>
             $!{value}

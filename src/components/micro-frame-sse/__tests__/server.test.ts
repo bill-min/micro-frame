@@ -193,11 +193,6 @@ describe("micro-frame-sse", () => {
   );
 
   describe(
-    "ssr client-order-timeout",
-    fixture(path.join(__dirname, "fixtures/ssr-client-order-timeout"))
-  );
-
-  describe(
     "ssr timeout",
     fixture(path.join(__dirname, "fixtures/ssr-timeout"))
   );
